@@ -1,4 +1,13 @@
-let colors = ['#0b3d2e', '#1f7a4d', '#4caf50', '#cddc39', '#ffeb3b', '#00e5ff', '#00bcd4', '#1565c0'];
+let colors = [
+  '#0b3d2e',
+  '#1f7a4d',
+  '#4caf50',
+  '#cddc39',
+  '#ffeb3b', 
+  '#00e5ff', 
+  '#00bcd4',
+  '#1565c0'  
+];
 let pos = [];
 
 function setup() {
