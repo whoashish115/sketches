@@ -1,4 +1,4 @@
-let paticles = [];
+let particles = [];
 let emitters = [];
 
 const palette = ["#00f5d4", "#0bbcd6", "#3a86ff", "#8338ec", "#ff006e"];
