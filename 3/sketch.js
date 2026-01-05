@@ -1,6 +1,7 @@
 let t = 0;
 let scaleFactor = 0.005; // bigger so noise is visible
 
+// 🌊 Deep sea / dark cyan-blue palette
 let palette = [
   [2, 8, 20],      // almost black
   [0, 50, 70],     // dark cyan
@@ -27,6 +28,7 @@ function draw() {
       let nx = x * scaleFactor;
       let ny = y * scaleFactor;
 
+      // domain warping
       let qx = noise(nx + t, ny + t);
       let qy = noise(nx + 5 + t, ny + 5 + t);
 
@@ -35,8 +37,10 @@ function draw() {
 
       let warped = noise(nx + 4 * rx, ny + 4 * ry, t * 0.5);
 
+      // mild contrast shaping
       warped = pow(warped, 1.2);
 
+      // palette interpolation
       let scaled = warped * (palette.length - 1);
       let index = floor(scaled);
       let amt = scaled - index;
@@ -48,6 +52,7 @@ function draw() {
       let g = lerp(c1[1], c2[1], amt);
       let b = lerp(c1[2], c2[2], amt);
 
+      // subtle glow (don’t overdo for dark palette)
       r = constrain(r * 1.1, 0, 255);
       g = constrain(g * 1.1, 0, 255);
       b = constrain(b * 1.1, 0, 255);
