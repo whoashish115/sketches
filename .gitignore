@@ -1,2 +1,7 @@
 .DS_Store
 Thumbs.db
+node_modules/
+
+# recorder output
+*.webm
+*.mp4
