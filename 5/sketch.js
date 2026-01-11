@@ -10,6 +10,7 @@ function setup() {
 function generate() {
   centers = [];
 
+  // RANDOM centers (not grid)
   let count = int(width * height / 30000); // density control
 
   for (let i = 0; i < count; i++) {
@@ -37,12 +38,14 @@ function getFlow(x, y) {
     if (d < c.influence) {
       let power = (1 - d / c.influence);
 
+      // swirl force
       let tx = -dy / (d + 0.0001) * c.dir;
       let ty = dx / (d + 0.0001) * c.dir;
 
       vx += tx * power * c.strength * 0.05;
       vy += ty * power * c.strength * 0.05;
 
+      // inward spiral
       vx += -dx * 0.002 * power;
       vy += -dy * 0.002 * power;
     }
@@ -75,6 +78,7 @@ function drawSnakes() {
 
       let flow = getFlow(x, y);
 
+      // fallback tiny motion if no influence
       if (flow.mag() < 0.1) {
         flow = p5.Vector.random2D().mult(0.5);
       }
@@ -82,6 +86,7 @@ function drawSnakes() {
       x += flow.x;
       y += flow.y;
 
+      // stop if out of screen
       if (x < 0 || x > width || y < 0 || y > height) break;
     }
 
