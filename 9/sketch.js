@@ -18,7 +18,7 @@ let cellSize = 28;
 let threshold = 0.42;
 
 function setup() {
-  createCanvas(windowHeight, windowWidth);
+  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
   rectMode(CENTER);
   noLoop();
