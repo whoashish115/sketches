@@ -18,7 +18,7 @@ function setup() {
   ];
 
   cols = ceil(width / cellSize);
-  rows = ceil(width / cellSize);
+  rows = ceil(height / cellSize);
 
   background('#0B1D3A'); // dark blue background
 
