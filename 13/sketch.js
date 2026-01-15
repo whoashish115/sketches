@@ -8,6 +8,7 @@ function setup() {
   noStroke();
   noiseSeed(floor(random(10000)));
 
+  globalHueShift = random(360);
 
   generatePaths();
 }
