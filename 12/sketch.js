@@ -175,3 +175,8 @@ function drawStack(c) {
   }
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  generateCircles();
+  redraw();
+}
