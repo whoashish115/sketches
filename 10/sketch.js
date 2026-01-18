@@ -7,6 +7,7 @@ function setup() {
   noLoop();
   angleMode(DEGREES);
 
+  // Warm palette
   colors = ['#000', '#e8c22a', '#4f2001', '#FFA500', '#B22222', '#CD853F', '#FF7F50'];
 
   background(255);
@@ -14,6 +15,7 @@ function setup() {
 }
 
 function drawChaos() {
+  // Layered shapes (triangles, squares, arcs, pseudo-3D squares)
   for (let i = 0; i < shapeCount; i++) {
     let x = random(width);
     let y = random(height);
@@ -65,12 +67,14 @@ function drawChaos() {
     pop();
   }
 
+  // Random crisscross lines with varied thickness
   for (let i = 0; i < lineCount; i++) {
     stroke(colors[floor(random(colors.length))]);
     strokeWeight(random(0.5, 5));
     line(random(width), random(height), random(width), random(height));
   }
 
+  // Smooth white splines
   for (let i = 0; i < 40; i++) {
     noFill();
     stroke(255, random(100, 200));
@@ -82,6 +86,7 @@ function drawChaos() {
     endShape();
   }
 
+  // Tiny nested black squares for texture
   for (let i = 0; i < 300; i++) {
     let x = random(width);
     let y = random(height);
