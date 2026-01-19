@@ -492,6 +492,12 @@ function fieldAngle(x, y, phase) {
   return a;
 }
 
+function mousePressed() {
+  seed = floor(random(1e9));
+  regenerate();
+  redraw();
+}
+
 function keyPressed() {
   if (key === 'r' || key === 'R') {
     seed = floor(random(1e9));
