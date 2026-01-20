@@ -423,6 +423,11 @@ function drawTrail(s, pass) {
 // INTERACTION
 // -------------------------
 
+function mousePressed() {
+  seed = floor(random(1e9));
+  generate();
+}
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   seed = floor(random(1e9));
