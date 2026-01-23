@@ -1,7 +1,7 @@
 let rings = [];
 let leaves = [];
 let shrubs = [];
- THEME = [
+let THEME = [
   '#1e2a38','#2a3f5f','#3b5b92','#5c7cfa',
   '#91a7ff','#bac8ff','#dbe4ff','#edf2ff'
 ];
