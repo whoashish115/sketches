@@ -145,3 +145,8 @@ function drawRing(cfg) {
   endShape(CLOSE);
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  generateScene();
+  redraw();
+}
