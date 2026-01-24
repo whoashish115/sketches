@@ -9,6 +9,17 @@ bundled and there is no build step, the whole thing is just static files.
 The rule I set myself is simple: one sketch a day, and I don't go back to
 polish yesterday's.
 
+## running locally
+
+Any static file server works. I use the Live Server extension in VS Code
+(the port is pinned in `.vscode/settings.json`), but this is fine too:
+
+```bash
+python -m http.server 5501
+```
+
+Then open `http://localhost:5501/12/` to view sketch 12, and so on.
+
 ## sketches
 
 1. [additive color grid](1/)
