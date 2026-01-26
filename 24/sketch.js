@@ -2,7 +2,7 @@ let palette;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  pixelDensity(4);
+  pixelDensity(2);
   smooth();
   noLoop();
   noiseDetail(4, 0.55);
