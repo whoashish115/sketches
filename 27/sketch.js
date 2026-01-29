@@ -7,7 +7,7 @@ function setup() {
   noLoop();
   randomSeed(seed);
   noiseSeed(seed);
-  noiseDetail(10, 1.65);
+  noiseDetail(10, 0.65);
   colorMode(HSB, 360, 100, 100, 1);
   background(0, 0, 8); // deep charcoal
   
