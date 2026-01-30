@@ -20,6 +20,9 @@ python -m http.server 5501
 
 Then open `http://localhost:5501/12/` to view sketch 12, and so on.
 
+Every sketch loads `record.js`, which grabs the canvas as a webm. It starts on
+load and `r` toggles it, so hit `r` once when you have the frame you want.
+
 ## sketches
 
 1. [additive color grid](1/)
