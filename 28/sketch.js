@@ -8,7 +8,7 @@ function setup() {
 }
 
 function draw() {
-  let dotSpacing = 1; 
+  let dotSpacing = 4; 
 
   let noiseScale = 0.005; 
 
