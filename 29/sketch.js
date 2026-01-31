@@ -105,3 +105,7 @@ function windowResized() {
 }
 
 // Refresh logic
+function mousePressed() {
+  generateNewPalette();
+  redraw();
+}
