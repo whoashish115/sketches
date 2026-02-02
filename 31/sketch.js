@@ -1,7 +1,7 @@
 
 let tiles = [];
 let palette = [];        // vibrant colors on black background
-globalColorSeed = 0;
+let globalColorSeed = 0;
 
 const phi = (1 + Math.sqrt(5)) / 2;
 
