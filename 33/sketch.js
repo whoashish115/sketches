@@ -3,7 +3,7 @@ let clusters = [];
 let clusterCount = 6;
 
 const flowScale = 0.008;
-let radiusLimt;
+let radiusLimit;
 
 const tones = [
   "#0B132B",
