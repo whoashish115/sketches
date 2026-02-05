@@ -216,6 +216,14 @@ function connectParticles() {
   }
 }
 
+function mousePressed() {
+  mouseField.active = true;
+}
+
+function mouseReleased() {
+  mouseField.active = false;
+}
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   bgGfx = createGraphics(windowWidth, windowHeight);
