@@ -1,3 +1,6 @@
+// sketch.js - Chaotic Penrose Tiling (Black BG, Multiple Seed Patterns)
+// Click / 'R' → regenerate chaotic clusters with different internal patterns.
+// 'S' → save PNG.
 
 let tiles = [];
 let palette = [];        // vibrant colors on black background
@@ -5,6 +8,7 @@ let globalColorSeed = 0;
 
 const phi = (1 + Math.sqrt(5)) / 2;
 
+// Rhombus class
 class Rhombus {
   constructor(v0, v1, v2, v3, type) {
     this.v0 = v0.copy();
@@ -25,6 +29,10 @@ function rotateVec(v, ang) {
   return createVector(v.x*c - v.y*s, v.x*s + v.y*c);
 }
 
+// ------------------------------------------------------------
+// Different seed patterns (not just the sun)
+// ------------------------------------------------------------
+// 1) Classic "Sun" : 5 thick rhombuses around a point
 function createSunSeed(rot) {
   let tiles = [];
   let center = createVector(0,0);
@@ -39,6 +47,7 @@ function createSunSeed(rot) {
   return tiles;
 }
 
+// 2) "Star" : 5 thin rhombuses around a point (acute angle 36°)
 function createStarSeed(rot) {
   let tiles = [];
   let center = createVector(0,0);
@@ -48,11 +57,13 @@ function createStarSeed(rot) {
     let a = i*acute36*2 + rot; // every 72°, but thin rhombus uses 36° edge
     let e1 = rotateVec(createVector(len,0), a);
     let e2 = rotateVec(createVector(len*phi,0), a+acute36); // thin rhombus has longer diagonal
+    // vertices: center, e1, e1+e2, e2
     tiles.push(new Rhombus(center, e1, p5.Vector.add(e1,e2), e2, 1));
   }
   return tiles;
 }
 
+// 3) "Cartwheel" core: mix of thick and thin around a decagon (approximate)
 function createCartwheelSeed(rot) {
   let tiles = [];
   let center = createVector(0,0);
@@ -64,18 +75,21 @@ function createCartwheelSeed(rot) {
     let e1 = rotateVec(createVector(r,0), a1);
     let e2 = rotateVec(createVector(r,0), a2);
     tiles.push(new Rhombus(center, e1, p5.Vector.add(e1,e2), e2, 0));
+    // add a thin one adjacent
     let e3 = rotateVec(createVector(r*phi,0), a1+radians(18));
     tiles.push(new Rhombus(e1, e2, p5.Vector.add(e2,e3), e3, 1));
   }
   return tiles;
 }
 
+// 4) Random hybrid: pick a random seed type + add extra arbitrary tile
 function createRandomSeed(rot) {
   let type = floor(random(3));
   let base;
   if (type === 0) base = createSunSeed(rot);
   else if (type === 1) base = createStarSeed(rot);
   else base = createCartwheelSeed(rot);
+  // sometimes add a stray tile for extra chaos
   if (random() > 0.65) {
     let extra = new Rhombus(createVector(0.5,0.5), createVector(1.2,0), createVector(1.5,0.7), createVector(0.8,1.2), floor(random(2)));
     base.push(extra);
@@ -83,6 +97,9 @@ function createRandomSeed(rot) {
   return base;
 }
 
+// ------------------------------------------------------------
+// Inflation (same substitution rules)
+// ------------------------------------------------------------
 function inflateThick(r) {
   let v0=r.v0, v1=r.v1, v2=r.v2, v3=r.v3;
   let invPhi = 1/phi;
@@ -116,6 +133,9 @@ function generateRawPatch(iter, seedRot, seedTypeMix = true) {
   return patch;
 }
 
+// ------------------------------------------------------------
+// Transform patch to world
+// ------------------------------------------------------------
 function getBBox(patch) {
   let minX=Infinity, minY=Infinity, maxX=-Infinity, maxY=-Infinity;
   for (let t of patch) {
@@ -141,6 +161,9 @@ function transformPatch(patch, scale, rot, tx, ty) {
   return out;
 }
 
+// ------------------------------------------------------------
+// Colors (vibrant on black)
+// ------------------------------------------------------------
 function generateVibrantPalette() {
   let pal = [];
   let baseHue = random(360);
@@ -149,6 +172,7 @@ function generateVibrantPalette() {
     let hue = (baseHue + i*37 + random(-15,15)) % 360;
     pal.push(color(`hsl(${hue}, ${random(70,100)}%, ${random(55,85)}%)`));
   }
+  // add neon accents
   pal.push(color(`hsl(${(baseHue+180)%360}, 95%, 65%)`));
   pal.push(color(`hsl(${(baseHue+90)%360}, 90%, 70%)`));
   pal.push(color(`hsl(${(baseHue+270)%360}, 85%, 60%)`));
@@ -178,11 +202,15 @@ function drawRhombus(tile, fillCol, strokeCol) {
   endShape(CLOSE);
 }
 
+// ------------------------------------------------------------
+// Main chaos generation
+// ------------------------------------------------------------
 function generateChaos() {
   tiles = [];
   globalColorSeed = random(10000);
   palette = generateVibrantPalette();
   
+  // black background always
   background(0);
   
   let numClusters = floor(random(55, 140));
@@ -207,6 +235,7 @@ function generateChaos() {
     tiles.push(...world);
   }
   
+  // extra micro-clusters to increase density
   let extraCount = floor(random(20, 50));
   for (let i=0; i<extraCount; i++) {
     let shallow = floor(random(2, 4));
@@ -219,6 +248,7 @@ function generateChaos() {
     tiles.push(...transformPatch(tinyRaw, sc, r, xp, yp));
   }
   
+  // shuffle drawing order
   for (let i=tiles.length-1; i>0; i--) {
     let j = floor(random(i+1));
     [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
@@ -240,6 +270,9 @@ function drawSparkles() {
   pop();
 }
 
+// ------------------------------------------------------------
+// p5.js
+// ------------------------------------------------------------
 function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(RGB);
