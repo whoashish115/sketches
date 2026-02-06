@@ -115,3 +115,6 @@ function drawBranch(level, hueShift) {
   }
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
