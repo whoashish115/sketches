@@ -1,7 +1,7 @@
 let t = 0;
 
 let rows = 6;
-let cols = 1;
+let cols = 10;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
