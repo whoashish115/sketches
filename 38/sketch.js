@@ -19,7 +19,7 @@ let debris = [];
 let fire = [];   
 
 let groundLayer;
-let fireparticle_count = 3000
+let fireparticle_count = 300
 const CFG = {
   initialCells: 34,
   maxCells: 72,
