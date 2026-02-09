@@ -1,0 +1,4 @@
+# the p5 builds are vendored, keep them out of the language stats and diffs
+p5.js            linguist-vendored
+p5-1.11.11.js    linguist-vendored
+p5.webgpu.js     linguist-vendored
